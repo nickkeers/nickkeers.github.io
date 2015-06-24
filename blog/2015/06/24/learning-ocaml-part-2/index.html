@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Learning OCaml - Part 2 - Nick Keers</title>
+  <meta name="author" content="Nick Keers">
+
+  
+  <meta name="description" content="Learning OCaml - Part 2 written in ocaml, walkthrough Day 2 of the learning process! Today I’ve changed the way I’m writing, I’m now writing the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://nickkeers.github.io/blog/2015/06/24/learning-ocaml-part-2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Nick Keers" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Learning OCaml - Part 2</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-06-24T13:58:01+01:00" pubdate data-updated="true"></time>
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ocaml/'>ocaml</a>, <a class='category' href='/blog/categories/walkthrough/'>walkthrough</a>
+  
+</span>
+
+
+        </div>
+        <p>Day 2 of the learning process! Today I’ve changed the way I’m writing, I’m now writing the tutorial as I’m learning, which should make everything easier to understand – the last post was a mix of tenses and wasn’t very clear in my opinion. I’ve also switched to writing the tutorial locally using a WYSIWYG editor called Blue Griffon (<a href="http://bluegriffon.org/">http://bluegriffon.org/</a>), this is still not ideal as the process of adding code tags and hyperlinks etc is slow because of the lack of keyboard shortcuts; but the generated HTML it produces is very tidy.</p>
+
+<!--more-->
+
+
+<h2>Onto the learning!</h2>
+
+<p>So, in part 1 I setup the latest version of OCaml and Opam for managing packages, now we can get to playing with the syntax. OCaml supports a REPL which is always helpful when you’re learning or just wanting to try out something quickly. The REPL can be started with ocaml options objects for interactive mode – I ran ocaml to start.</p>
+
+<p>And so time to play around with some things, I’m going to use the OCaml basics tutorial as a reference.</p>
+
+<p>So, looking through the first lines I can see multi-line comments are in the form:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="c">(*</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">A multiline comment</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">*)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And there are no single line comments, well, guess I can live with that. The basics tutorial then goes into defining functions, but I think that’s going a bit too far forward, instead I’m going to look around for something that describes OCaml types and operators as I know there are different operators depending on the data types used.</p>
+
+<h2>Types</h2>
+
+<p>I searched for “OCaml primitive data types” and found this helpful page: <a href="http://www2.lib.uchicago.edu/keith/ocaml-class/data.html">http://www2.lib.uchicago.edu/keith/ocaml-class/data.html</a> – excellent, it lists all the primitive types. Looks like as far as primitives there are:</p>
+
+<ul>
+<li>Integers</li>
+<li>Floating point</li>
+<li>Characters</li>
+<li>Booleans</li>
+<li>Unit values – for functions that return no value – I’m familiar with
+these through Haskell</li>
+<li>Tuples</li>
+<li>Lists</li>
+<li>Arrays</li>
+<li>Option – optional values, I like how this is included in the standard
+library, very helpful.</li>
+<li>Records</li>
+<li>References</li>
+<li>Variants – user-defined types</li>
+<li>Objects</li>
+<li>Functions</li>
+<li>Exceptions</li>
+<li>Formats (for printf) – how odd.</li>
+</ul>
+
+
+<p>Wow, that’s a lot. Luckily most of these are familiar to me due to previous experience whichis great.
+Operators</p>
+
+<p>I did another search here for “OCaml operators” and found another website: <a href="http://caml.inria.fr/pub/docs/manual-ocaml/expr.html#sec138">http://caml.inria.fr/pub/docs/manual-ocaml/expr.html#sec138</a> Scrolling down reveals a table of operators and their meaning, that’s helpful. And yep, there we go, looks like there are different operators for floating point and integers.</p>
+
+<p>Back to the REPL to try some of them out. Some basic integer expressions, result after the terminating semi-colons:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">;;</span>     <span class="c">(* - : int = 3  *)</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">4</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;;</span>     <span class="c">(* - : int = 2  *)</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">6</span> <span class="o">*</span> <span class="mi">3</span><span class="o">;;</span>     <span class="c">(* - : int = 18 *)</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">~-</span><span class="mi">5</span><span class="o">;;</span>       <span class="c">(* - : int = -5  Representing a negative number *)</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span> <span class="ow">land</span> <span class="mi">0</span><span class="o">;;</span>  <span class="c">(* - : int = 0  Bitwise logical AND *)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ok, well that wasn’t too bad, I like how the Bitwise logical operators are easy to remember: lor, land, lxor, etc. So let’s try some expressions that involve floating point numbers:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="o">+.</span> <span class="mi">1</span><span class="o">.</span><span class="mi">25</span><span class="o">;;</span>   <span class="c">(* - : float = 2.25 *)</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">3</span><span class="o">.</span><span class="mi">141592</span> <span class="o">*.</span> <span class="o">(</span><span class="mi">5</span><span class="o">.</span><span class="mi">0</span> <span class="o">*.</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span><span class="o">);;</span>   <span class="c">(*  - : float = 78.5398 *)</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">9</span><span class="o">.</span><span class="mi">831</span> <span class="o">/.</span> <span class="mi">1</span><span class="o">.</span><span class="mi">3451</span><span class="o">;;</span>  <span class="c">(*  - : float = 7.30875027878968098 *)</span>
+</span><span class='line'><span class="c">(* Wow, a good amount of precision too *)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Functions</h2>
+
+<p>Now we can look at functions! Let’s write a set of functions for computing the area of a circle. The formula for the area of a circle is ${\pi}r^{2}$ , and knowing that we can write a function that takes a radius and returns the area of the circle. Functions in OCaml according to the basics guide are in the form:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="k">let</span> <span class="k">function</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">expr</span><span class="o">;;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So the area function would be:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="c">(*</span>
+</span><span class='line'><span class="c">I tried defining area like this, but it didn&#39;t work. Not too sure why yet, but we&#39;ll get back to it at some point.</span>
+</span><span class='line'><span class="c">let area r : float -&gt; float = (4.0 *. atan 1.0) *. (r *. r);;</span>
+</span><span class='line'><span class="c">Error: This expression has type float but an expression was expected of type</span>
+</span><span class='line'><span class="c">         float -&gt; float</span>
+</span><span class='line'><span class="c">*)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="n">pi</span> <span class="o">=</span> <span class="mi">4</span><span class="o">.</span><span class="mi">0</span> <span class="o">*.</span> <span class="n">atan</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">;;</span> <span class="c">(* extracted pi out, this is as close as you can get apparently to pi with OCaml&#39;s float *)</span>
+</span><span class='line'><span class="k">let</span> <span class="n">area</span> <span class="n">r</span> <span class="o">=</span>
+</span><span class='line'>  <span class="n">pi</span> <span class="o">*.</span> <span class="o">(</span><span class="n">r</span> <span class="o">*.</span> <span class="n">r</span><span class="o">);;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">area</span> <span class="mi">5</span><span class="o">;;</span>  <span class="c">(* - : float = 78.5398163397448315 *)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ok, we’ve covered a lot of ground. That’s the very basics of OCaml, primitive data types and basic functions. Tomorrow I’m going to plan on looking at specifying types in functions and recursion, and perhaps writing a full program that does something useful.</p>
+
+<p>Sidenote: I’ve just copied in the source from the editor, and all the lines were positioned oddly, I had to manually shift lines together as there were odd breaks throughout. Looks like it’s back to the wordpress editor next time, unless anyone has a better idea?</p>
+
+
+        <hr class="divider-short"/>
+
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2015/06/24/learning-ocaml-part-1/" title="Previous Post: Learning OCaml - Part 1">&laquo; Previous: Learning OCaml - Part 1</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/nickkeers"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+
+    
+
+    
+
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+    
+  </body>
+</html>

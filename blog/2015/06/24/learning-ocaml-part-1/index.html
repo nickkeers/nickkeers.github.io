@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Learning OCaml - Part 1 - Nick Keers</title>
+  <meta name="author" content="Nick Keers">
+
+  
+  <meta name="description" content="Learning OCaml - Part 1 written in ocaml, walkthrough I’ve always been interested in learning OCaml, and I’ve been meaning to get into blogging; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://nickkeers.github.io/blog/2015/06/24/learning-ocaml-part-1">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Nick Keers" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Learning OCaml - Part 1</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-06-24T13:57:51+01:00" pubdate data-updated="true"></time>
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ocaml/'>ocaml</a>, <a class='category' href='/blog/categories/walkthrough/'>walkthrough</a>
+  
+</span>
+
+
+        </div>
+        <p>I’ve always been interested in learning OCaml, and I’ve been meaning to get into blogging; this means that this series (or walkthrough, as I’m going to walk you through how I’m learning as I learn) is the perfect opportunity! I’m going to attempt to write a blog post a day from now on, no matter how small the post. And so, let’s get started!</p>
+
+<!--more-->
+
+
+<h2>Installing OCaml</h2>
+
+<p>For future reference I’m running Xubuntu 15.04</p>
+
+<p>To get started I opened up the OCaml website (<a href="https://ocaml.org/">https://ocaml.org/</a>) and clicked the “Install OCaml” button. That button lead me to the OCaml docs. The docs told me I need to install a package manager called Opam, and so I opened a terminal and ran:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install opam</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now that Opam is installed I can use Opam to install the latest version of OCaml, and so I tried to run <code>opam switch 4.02.2</code> but was informed I need to first run <code>opam init</code> and so I ran that first and let Opam modify my profile and ocamlinit files.</p>
+
+<p>To install OCaml I can now run <code>opam switch 4.02.2</code> as follows:</p>
+
+<p><img class="center" src="/images/term2.png"></p>
+
+<p>Looks like Opam is compiling OCaml from source – naturally this took a while. Opam also said m4 was needed, as many packages rely on it – who am I to argue? – I installed m4 using apt-get.</p>
+
+<p>I’m glancing at the time as I’m writing this, and I’ve just realised it’s 10:46pm. The OCaml docs recommended installing packages called Batteries and Core.</p>
+
+<p>I can’t seem to work out what Batteries is or does, apparently it’s a “community-driven effort to standardize on an consistent, documented, and comprehensive development platform for the OCaml programming language” – ok but that doesn’t tell me how Batteries included helps me, so I’ll skip the installation for now.</p>
+
+<p>Core however seems more interesting. It looks like Core was written by the folks at Jane Street who are the largest industry users of OCaml, that means that it’s tried and tested. Core is apparently an alternative to the OCaml standard library, and I assume you don’t re-implement the standard library unless you know what you’re doing. And so, I installed Core using Opam (<code>opam install core</code>).</p>
+
+<h2>Running our first OCaml program</h2>
+
+<p>Ok, now the fun part, lets write a program! I found it a bit difficult to find documentation on how to print a string, but I’m going to assume that’s because it’s getting late and I’m looking in the wrong places. Long story short, our hello world program is only one line:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="n">print_string</span> <span class="s2">&quot;Hello world!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">;;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Well, that wasn’t too bad – thanks Amir Chaudhry! (<a href="http://amirchaudhry.com/ocaml-installation-and-hello-world/">http://amirchaudhry.com/ocaml-installation-and-hello-world/</a>). I compiled the code using his instructions and it ran like a charm:</p>
+
+<p><img class="center" src="/images/opam_term.png"></p>
+
+<p>And so that’s it for tonight, tomorrow I’ll start exploring what the language itself can do by writing an example program and by running through a basic tutorial (or two!).</p>
+
+
+        <hr class="divider-short"/>
+
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+
+        
+          <a class="pull-right" href="/blog/2015/06/24/learning-ocaml-part-2/" title="Next Post: Learning OCaml - Part 2">Next: Learning OCaml - Part 2 &raquo;</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/nickkeers"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+
+    
+
+    
+
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+    
+  </body>
+</html>
