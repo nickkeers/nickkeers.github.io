@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://nickkeers.github.io/blog/2015/06/25/revisiting-scala/</loc>
+    <lastmod>2015-06-25T14:25:39+01:00</lastmod>
+  </url>
+  <url>
     <loc>http://nickkeers.github.io/blog/2015/06/24/learning-ocaml-part-2/</loc>
     <lastmod>2015-06-24T13:58:01+01:00</lastmod>
   </url>
@@ -22,5 +26,14 @@
   </url>
   <url>
     <loc>http://nickkeers.github.io/blog/categories/walkthrough/</loc>
+  </url>
+  <url>
+    <loc>http://nickkeers.github.io/blog/categories/scala/</loc>
+  </url>
+  <url>
+    <loc>http://nickkeers.github.io/blog/categories/programming/</loc>
+  </url>
+  <url>
+    <loc>http://nickkeers.github.io/blog/categories/javafx/</loc>
   </url>
 </urlset>

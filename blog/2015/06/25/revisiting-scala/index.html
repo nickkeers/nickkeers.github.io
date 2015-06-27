@@ -1,24 +1,88 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Nick Keers]]></title>
-  <link href="http://nickkeers.github.io/atom.xml" rel="self"/>
-  <link href="http://nickkeers.github.io/"/>
-  <updated>2015-06-27T23:00:38+01:00</updated>
-  <id>http://nickkeers.github.io/</id>
-  <author>
-    <name><![CDATA[Nick Keers]]></name>
-    
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Revisiting Scala - Nick Keers</title>
+  <meta name="author" content="Nick Keers">
 
   
-  <entry>
-    <title type="html"><![CDATA[Revisiting Scala]]></title>
-    <link href="http://nickkeers.github.io/blog/2015/06/25/revisiting-scala/"/>
-    <updated>2015-06-25T14:25:39+01:00</updated>
-    <id>http://nickkeers.github.io/blog/2015/06/25/revisiting-scala</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve been feeling ill the last couple of days and haven&rsquo;t been able to face writing, but today I&rsquo;m a lot better, so that means it&rsquo;s time to write! I&rsquo;m going to take a break from OCaml for a little bit - to tell the truth I was mostly interested in using F# and OCaml was more something to help with learning as F# and OCaml are very similar. Today I&rsquo;m going to look at Scala again which should be more fun as I&rsquo;m a Java programmer!</p>
+  <meta name="description" content="Revisiting Scala written in javafx, programming,, scala, I&rsquo;ve been feeling ill the last couple of days and haven&rsquo;t been able to face &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://nickkeers.github.io/blog/2015/06/25/revisiting-scala">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Nick Keers" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-64480409-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Revisiting Scala</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-06-25T14:25:39+01:00" pubdate data-updated="true"></time>
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/javafx/'>javafx</a>, <a class='category' href='/blog/categories/programming/'>programming,</a>, <a class='category' href='/blog/categories/scala/'>scala,</a>
+  
+</span>
+
+
+        </div>
+        <p>I&rsquo;ve been feeling ill the last couple of days and haven&rsquo;t been able to face writing, but today I&rsquo;m a lot better, so that means it&rsquo;s time to write! I&rsquo;m going to take a break from OCaml for a little bit - to tell the truth I was mostly interested in using F# and OCaml was more something to help with learning as F# and OCaml are very similar. Today I&rsquo;m going to look at Scala again which should be more fun as I&rsquo;m a Java programmer!</p>
 
 <!--more-->
 
@@ -132,7 +196,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>The result looks like this: <img class="center" src="http://nickkeers.github.io/images/scalafx_hello.png"></p>
+<p>The result looks like this: <img class="center" src="/images/scalafx_hello.png"></p>
 
 <p>Simple enough, right? Looks like components are even styled using CSS-like properties which is handy.</p>
 
@@ -254,206 +318,62 @@
 <p>I&rsquo;m not sure which one would be easier to make first, or if I&rsquo;d maybe have to do something smaller first. However, I feel I learn faster by having a project to complete and learning as I go - so many decisions&hellip;</p>
 
 <p>That&rsquo;s all for now!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning OCaml - Part 2]]></title>
-    <link href="http://nickkeers.github.io/blog/2015/06/24/learning-ocaml-part-2/"/>
-    <updated>2015-06-24T13:58:01+01:00</updated>
-    <id>http://nickkeers.github.io/blog/2015/06/24/learning-ocaml-part-2</id>
-    <content type="html"><![CDATA[<p>Day 2 of the learning process! Today I’ve changed the way I’m writing, I’m now writing the tutorial as I’m learning, which should make everything easier to understand – the last post was a mix of tenses and wasn’t very clear in my opinion. I’ve also switched to writing the tutorial locally using a WYSIWYG editor called Blue Griffon (<a href="http://bluegriffon.org/">http://bluegriffon.org/</a>), this is still not ideal as the process of adding code tags and hyperlinks etc is slow because of the lack of keyboard shortcuts; but the generated HTML it produces is very tidy.</p>
-
-<!--more-->
 
 
-<h2>Onto the learning!</h2>
+        <hr class="divider-short"/>
 
-<p>So, in part 1 I setup the latest version of OCaml and Opam for managing packages, now we can get to playing with the syntax. OCaml supports a REPL which is always helpful when you’re learning or just wanting to try out something quickly. The REPL can be started with ocaml options objects for interactive mode – I ran ocaml to start.</p>
+        
+      </div>
+    </div>
+  </div>
+</article>
 
-<p>And so time to play around with some things, I’m going to use the OCaml basics tutorial as a reference.</p>
+<hr class="divider-short"/>
 
-<p>So, looking through the first lines I can see multi-line comments are in the form:</p>
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2015/06/24/learning-ocaml-part-2/" title="Previous Post: Learning OCaml - Part 2">&laquo; Previous: Learning OCaml - Part 2</a>
+        
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="c">(*</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">A multiline comment</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">*)</span>
-</span></code></pre></td></tr></table></div></figure>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
 
-<p>And there are no single line comments, well, guess I can live with that. The basics tutorial then goes into defining functions, but I think that’s going a bit too far forward, instead I’m going to look around for something that describes OCaml types and operators as I know there are different operators depending on the data types used.</p>
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/nickkeers"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
 
-<h2>Types</h2>
+    
 
-<p>I searched for “OCaml primitive data types” and found this helpful page: <a href="http://www2.lib.uchicago.edu/keith/ocaml-class/data.html">http://www2.lib.uchicago.edu/keith/ocaml-class/data.html</a> – excellent, it lists all the primitive types. Looks like as far as primitives there are:</p>
+    
 
-<ul>
-<li>Integers</li>
-<li>Floating point</li>
-<li>Characters</li>
-<li>Booleans</li>
-<li>Unit values – for functions that return no value – I’m familiar with
-these through Haskell</li>
-<li>Tuples</li>
-<li>Lists</li>
-<li>Arrays</li>
-<li>Option – optional values, I like how this is included in the standard
-library, very helpful.</li>
-<li>Records</li>
-<li>References</li>
-<li>Variants – user-defined types</li>
-<li>Objects</li>
-<li>Functions</li>
-<li>Exceptions</li>
-<li>Formats (for printf) – how odd.</li>
-</ul>
+    
+  </div>
+</div>
 
-
-<p>Wow, that’s a lot. Luckily most of these are familiar to me due to previous experience whichis great.
-Operators</p>
-
-<p>I did another search here for “OCaml operators” and found another website: <a href="http://caml.inria.fr/pub/docs/manual-ocaml/expr.html#sec138">http://caml.inria.fr/pub/docs/manual-ocaml/expr.html#sec138</a> Scrolling down reveals a table of operators and their meaning, that’s helpful. And yep, there we go, looks like there are different operators for floating point and integers.</p>
-
-<p>Back to the REPL to try some of them out. Some basic integer expressions, result after the terminating semi-colons:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">;;</span>     <span class="c">(* - : int = 3  *)</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">4</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;;</span>     <span class="c">(* - : int = 2  *)</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">6</span> <span class="o">*</span> <span class="mi">3</span><span class="o">;;</span>     <span class="c">(* - : int = 18 *)</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">~-</span><span class="mi">5</span><span class="o">;;</span>       <span class="c">(* - : int = -5  Representing a negative number *)</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">1</span> <span class="ow">land</span> <span class="mi">0</span><span class="o">;;</span>  <span class="c">(* - : int = 0  Bitwise logical AND *)</span>
-</span></code></pre></td></tr></table></div></figure>
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
 
 
-<p>Ok, well that wasn’t too bad, I like how the Bitwise logical operators are easy to remember: lor, land, lxor, etc. So let’s try some expressions that involve floating point numbers:</p>
+    </div>
+  </div>
+</footer>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="o">+.</span> <span class="mi">1</span><span class="o">.</span><span class="mi">25</span><span class="o">;;</span>   <span class="c">(* - : float = 2.25 *)</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">3</span><span class="o">.</span><span class="mi">141592</span> <span class="o">*.</span> <span class="o">(</span><span class="mi">5</span><span class="o">.</span><span class="mi">0</span> <span class="o">*.</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span><span class="o">);;</span>   <span class="c">(*  - : float = 78.5398 *)</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">9</span><span class="o">.</span><span class="mi">831</span> <span class="o">/.</span> <span class="mi">1</span><span class="o">.</span><span class="mi">3451</span><span class="o">;;</span>  <span class="c">(*  - : float = 7.30875027878968098 *)</span>
-</span><span class='line'><span class="c">(* Wow, a good amount of precision too *)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Functions</h2>
-
-<p>Now we can look at functions! Let’s write a set of functions for computing the area of a circle. The formula for the area of a circle is ${\pi}r^{2}$ , and knowing that we can write a function that takes a radius and returns the area of the circle. Functions in OCaml according to the basics guide are in the form:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="k">let</span> <span class="k">function</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">expr</span><span class="o">;;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So the area function would be:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="c">(*</span>
-</span><span class='line'><span class="c">I tried defining area like this, but it didn&#39;t work. Not too sure why yet, but we&#39;ll get back to it at some point.</span>
-</span><span class='line'><span class="c">let area r : float -&gt; float = (4.0 *. atan 1.0) *. (r *. r);;</span>
-</span><span class='line'><span class="c">Error: This expression has type float but an expression was expected of type</span>
-</span><span class='line'><span class="c">         float -&gt; float</span>
-</span><span class='line'><span class="c">*)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="n">pi</span> <span class="o">=</span> <span class="mi">4</span><span class="o">.</span><span class="mi">0</span> <span class="o">*.</span> <span class="n">atan</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">;;</span> <span class="c">(* extracted pi out, this is as close as you can get apparently to pi with OCaml&#39;s float *)</span>
-</span><span class='line'><span class="k">let</span> <span class="n">area</span> <span class="n">r</span> <span class="o">=</span>
-</span><span class='line'>  <span class="n">pi</span> <span class="o">*.</span> <span class="o">(</span><span class="n">r</span> <span class="o">*.</span> <span class="n">r</span><span class="o">);;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">area</span> <span class="mi">5</span><span class="o">;;</span>  <span class="c">(* - : float = 78.5398163397448315 *)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Ok, we’ve covered a lot of ground. That’s the very basics of OCaml, primitive data types and basic functions. Tomorrow I’m going to plan on looking at specifying types in functions and recursion, and perhaps writing a full program that does something useful.</p>
-
-<p>Sidenote: I’ve just copied in the source from the editor, and all the lines were positioned oddly, I had to manually shift lines together as there were odd breaks throughout. Looks like it’s back to the wordpress editor next time, unless anyone has a better idea?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning OCaml - Part 1]]></title>
-    <link href="http://nickkeers.github.io/blog/2015/06/24/learning-ocaml-part-1/"/>
-    <updated>2015-06-24T13:57:51+01:00</updated>
-    <id>http://nickkeers.github.io/blog/2015/06/24/learning-ocaml-part-1</id>
-    <content type="html"><![CDATA[<p>I’ve always been interested in learning OCaml, and I’ve been meaning to get into blogging; this means that this series (or walkthrough, as I’m going to walk you through how I’m learning as I learn) is the perfect opportunity! I’m going to attempt to write a blog post a day from now on, no matter how small the post. And so, let’s get started!</p>
-
-<!--more-->
-
-
-<h2>Installing OCaml</h2>
-
-<p>For future reference I’m running Xubuntu 15.04</p>
-
-<p>To get started I opened up the OCaml website (<a href="https://ocaml.org/">https://ocaml.org/</a>) and clicked the “Install OCaml” button. That button lead me to the OCaml docs. The docs told me I need to install a package manager called Opam, and so I opened a terminal and ran:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install opam</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now that Opam is installed I can use Opam to install the latest version of OCaml, and so I tried to run <code>opam switch 4.02.2</code> but was informed I need to first run <code>opam init</code> and so I ran that first and let Opam modify my profile and ocamlinit files.</p>
-
-<p>To install OCaml I can now run <code>opam switch 4.02.2</code> as follows:</p>
-
-<p><img class="center" src="http://nickkeers.github.io/images/term2.png"></p>
-
-<p>Looks like Opam is compiling OCaml from source – naturally this took a while. Opam also said m4 was needed, as many packages rely on it – who am I to argue? – I installed m4 using apt-get.</p>
-
-<p>I’m glancing at the time as I’m writing this, and I’ve just realised it’s 10:46pm. The OCaml docs recommended installing packages called Batteries and Core.</p>
-
-<p>I can’t seem to work out what Batteries is or does, apparently it’s a “community-driven effort to standardize on an consistent, documented, and comprehensive development platform for the OCaml programming language” – ok but that doesn’t tell me how Batteries included helps me, so I’ll skip the installation for now.</p>
-
-<p>Core however seems more interesting. It looks like Core was written by the folks at Jane Street who are the largest industry users of OCaml, that means that it’s tried and tested. Core is apparently an alternative to the OCaml standard library, and I assume you don’t re-implement the standard library unless you know what you’re doing. And so, I installed Core using Opam (<code>opam install core</code>).</p>
-
-<h2>Running our first OCaml program</h2>
-
-<p>Ok, now the fun part, lets write a program! I found it a bit difficult to find documentation on how to print a string, but I’m going to assume that’s because it’s getting late and I’m looking in the wrong places. Long story short, our hello world program is only one line:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="n">print_string</span> <span class="s2">&quot;Hello world!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">;;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Well, that wasn’t too bad – thanks Amir Chaudhry! (<a href="http://amirchaudhry.com/ocaml-installation-and-hello-world/">http://amirchaudhry.com/ocaml-installation-and-hello-world/</a>). I compiled the code using his instructions and it ran like a charm:</p>
-
-<p><img class="center" src="http://nickkeers.github.io/images/opam_term.png"></p>
-
-<p>And so that’s it for tonight, tomorrow I’ll start exploring what the language itself can do by writing an example program and by running through a basic tutorial (or two!).</p>
-]]></content>
-  </entry>
-  
-</feed>
+    
+  </body>
+</html>
