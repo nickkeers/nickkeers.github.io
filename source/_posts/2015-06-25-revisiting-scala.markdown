@@ -3,7 +3,7 @@ layout: post
 title: "Revisiting Scala"
 date: 2015-06-25 14:25:39 +0100
 comments: true
-categories: scala, programming, javafx
+categories: scala,programming,javafx
 ---
 
 I've been feeling ill the last couple of days and haven't been able to face writing, but today I'm a lot better, so that means it's time to write! I'm going to take a break from OCaml for a little bit - to tell the truth I was mostly interested in using F# and OCaml was more something to help with learning as F# and OCaml are very similar. Today I'm going to look at Scala again which should be more fun as I'm a Java programmer!
