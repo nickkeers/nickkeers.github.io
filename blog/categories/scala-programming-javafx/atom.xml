@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Scala, | Nick Keers]]></title>
-  <link href="http://nickkeers.github.io/blog/categories/scala/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Scala,programming,javafx | Nick Keers]]></title>
+  <link href="http://nickkeers.github.io/blog/categories/scala-programming-javafx/atom.xml" rel="self"/>
   <link href="http://nickkeers.github.io/"/>
-  <updated>2015-06-27T23:00:38+01:00</updated>
+  <updated>2015-06-28T15:54:03+01:00</updated>
   <id>http://nickkeers.github.io/</id>
   <author>
     <name><![CDATA[Nick Keers]]></name>
