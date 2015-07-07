@@ -1,0 +1,50 @@
+<div class="highlight"><pre><span class="k">package</span> <span class="nn">hello</span>
+
+<span class="k">import</span> <span class="nn">scalafx.application.JFXApp</span>
+<span class="k">import</span> <span class="nn">scalafx.application.JFXApp.PrimaryStage</span>
+<span class="k">import</span> <span class="nn">scalafx.collections.ObservableBuffer</span>
+<span class="k">import</span> <span class="nn">scalafx.scene.Scene</span>
+<span class="k">import</span> <span class="nn">scalafx.scene.control.</span><span class="o">{</span><span class="nc">ComboBox</span><span class="o">,</span> <span class="nc">Label</span><span class="o">,</span> <span class="nc">TextField</span><span class="o">}</span>
+<span class="k">import</span> <span class="nn">javafx.util.StringConverter</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Created by nick on 26/06/15.</span>
+<span class="cm"> */</span>
+<span class="k">class</span> <span class="nc">TempConvert</span> <span class="k">extends</span> <span class="nc">JFXApp</span>
+<span class="o">{</span>
+  <span class="k">def</span> <span class="n">cToF</span><span class="o">(</span><span class="n">c</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">(</span><span class="mi">9</span><span class="o">/</span><span class="mi">5</span><span class="n">d</span> <span class="o">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">+</span> <span class="mi">32</span>
+  <span class="k">def</span> <span class="n">fToC</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span><span class="n">d</span> <span class="o">*</span> <span class="o">(</span><span class="n">f</span> <span class="o">-</span> <span class="mi">32</span><span class="o">)</span>
+  <span class="k">def</span> <span class="n">cToF</span><span class="o">(</span><span class="n">c</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">cToF</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="n">toDouble</span><span class="o">).</span><span class="n">round</span><span class="o">.</span><span class="n">toString</span>
+  <span class="k">def</span> <span class="n">fToC</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">fToC</span><span class="o">(</span><span class="n">f</span><span class="o">.</span><span class="n">toDouble</span><span class="o">).</span><span class="n">round</span><span class="o">.</span><span class="n">toString</span>
+
+  <span class="k">val</span> <span class="n">contents</span> <span class="k">=</span> <span class="nc">ObservableBuffer</span><span class="o">(</span><span class="s">&quot;C&quot;</span><span class="o">,</span> <span class="s">&quot;F&quot;</span><span class="o">)</span>
+
+  <span class="k">val</span> <span class="n">myCombo</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ComboBox</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="o">{</span>
+    <span class="n">items</span> <span class="k">=</span> <span class="n">contents</span>
+  <span class="o">}</span>
+
+  <span class="k">val</span> <span class="n">celsius</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">TextField</span>
+  <span class="k">val</span> <span class="n">fahrenheit</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">TextField</span>
+
+  <span class="k">def</span> <span class="n">isNumeric</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span> <span class="n">s</span><span class="o">.</span><span class="n">toDouble</span> <span class="o">}</span>
+    <span class="k">catch</span> <span class="o">{</span> <span class="k">case</span> <span class="k">_:</span> <span class="kt">Throwable</span> <span class="o">=&gt;</span> <span class="k">return</span> <span class="kc">false</span> <span class="o">}</span>
+    <span class="kc">true</span>
+  <span class="o">}</span>
+
+  <span class="n">celsius</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">bindBidirectional</span><span class="o">[</span><span class="kt">String</span><span class="o">](</span><span class="n">fahrenheit</span><span class="o">.</span><span class="n">text</span><span class="o">,</span> <span class="k">new</span> <span class="nc">StringConverter</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">override</span> <span class="k">def</span> <span class="n">fromString</span><span class="o">(</span><span class="n">c</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">isNumeric</span><span class="o">(</span><span class="n">c</span><span class="o">))</span> <span class="n">cToF</span><span class="o">(</span><span class="n">c</span><span class="o">)</span> <span class="k">else</span> <span class="n">fahrenheit</span><span class="o">.</span><span class="n">text</span><span class="o">()</span>
+    <span class="k">override</span> <span class="k">def</span> <span class="n">toString</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">isNumeric</span><span class="o">(</span><span class="n">f</span><span class="o">))</span> <span class="n">fToC</span><span class="o">(</span><span class="n">f</span><span class="o">)</span> <span class="k">else</span> <span class="n">celsius</span><span class="o">.</span><span class="n">text</span><span class="o">()</span>
+  <span class="o">})</span>
+
+  <span class="n">stage</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PrimaryStage</span> <span class="o">{</span>
+    <span class="n">title</span> <span class="k">=</span> <span class="s">&quot;Temperature Convert&quot;</span>
+
+    <span class="n">scene</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Scene</span> <span class="o">{</span>
+      <span class="n">content</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="n">celsius</span><span class="o">,</span> <span class="nc">Label</span><span class="o">(</span><span class="s">&quot;Celsius =&quot;</span><span class="o">),</span> <span class="n">fahrenheit</span><span class="o">,</span> <span class="nc">Label</span><span class="o">(</span><span class="s">&quot;Fahrenheit&quot;</span><span class="o">))</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>

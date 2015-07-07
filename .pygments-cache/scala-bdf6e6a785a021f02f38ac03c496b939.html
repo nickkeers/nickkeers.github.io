@@ -1,0 +1,47 @@
+<div class="highlight"><pre><span class="k">package</span> <span class="nn">hello</span>
+
+<span class="k">import</span> <span class="nn">scalafx.application.JFXApp</span>
+<span class="k">import</span> <span class="nn">scalafx.application.JFXApp.PrimaryStage</span>
+<span class="k">import</span> <span class="nn">scalafx.geometry.Insets</span>
+<span class="k">import</span> <span class="nn">scalafx.scene.Scene</span>
+<span class="k">import</span> <span class="nn">scalafx.scene.effect.DropShadow</span>
+<span class="k">import</span> <span class="nn">scalafx.scene.layout.HBox</span>
+<span class="k">import</span> <span class="nn">scalafx.scene.paint.Color._</span>
+<span class="k">import</span> <span class="nn">scalafx.scene.paint.</span><span class="o">{</span><span class="nc">LinearGradient</span><span class="o">,</span> <span class="nc">Stops</span><span class="o">}</span>
+<span class="k">import</span> <span class="nn">scalafx.scene.text.Text</span>
+
+<span class="k">object</span> <span class="nc">ScalaFXHelloWorld</span> <span class="k">extends</span> <span class="nc">JFXApp</span> <span class="o">{</span>
+
+  <span class="n">stage</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PrimaryStage</span> <span class="o">{</span>
+    <span class="n">title</span> <span class="k">=</span> <span class="s">&quot;ScalaFX Hello World&quot;</span>
+    <span class="n">scene</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Scene</span> <span class="o">{</span>
+      <span class="n">fill</span> <span class="k">=</span> <span class="nc">BLACK</span>
+      <span class="n">content</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">HBox</span> <span class="o">{</span>
+        <span class="n">padding</span> <span class="k">=</span> <span class="nc">Insets</span><span class="o">(</span><span class="mi">20</span><span class="o">)</span>
+        <span class="n">content</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
+          <span class="k">new</span> <span class="nc">Text</span> <span class="o">{</span>
+            <span class="n">text</span> <span class="k">=</span> <span class="s">&quot;Hello &quot;</span>
+            <span class="n">style</span> <span class="k">=</span> <span class="s">&quot;-fx-font-size: 48pt&quot;</span>
+            <span class="n">fill</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LinearGradient</span><span class="o">(</span>
+              <span class="n">endX</span> <span class="k">=</span> <span class="mi">0</span><span class="o">,</span>
+              <span class="n">stops</span> <span class="k">=</span> <span class="nc">Stops</span><span class="o">(</span><span class="nc">PALEGREEN</span><span class="o">,</span> <span class="nc">SEAGREEN</span><span class="o">))</span>
+          <span class="o">},</span>
+          <span class="k">new</span> <span class="nc">Text</span> <span class="o">{</span>
+            <span class="n">text</span> <span class="k">=</span> <span class="s">&quot;World!!!&quot;</span>
+            <span class="n">style</span> <span class="k">=</span> <span class="s">&quot;-fx-font-size: 48pt&quot;</span>
+            <span class="n">fill</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LinearGradient</span><span class="o">(</span>
+              <span class="n">endX</span> <span class="k">=</span> <span class="mi">0</span><span class="o">,</span>
+              <span class="n">stops</span> <span class="k">=</span> <span class="nc">Stops</span><span class="o">(</span><span class="nc">CYAN</span><span class="o">,</span> <span class="nc">DODGERBLUE</span><span class="o">)</span>
+            <span class="o">)</span>
+            <span class="n">effect</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">DropShadow</span> <span class="o">{</span>
+              <span class="n">color</span> <span class="k">=</span> <span class="nc">DODGERBLUE</span>
+              <span class="n">radius</span> <span class="k">=</span> <span class="mi">25</span>
+              <span class="n">spread</span> <span class="k">=</span> <span class="mf">0.25</span>
+            <span class="o">}</span>
+          <span class="o">}</span>
+        <span class="o">)</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>

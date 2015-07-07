@@ -1,0 +1,13 @@
+<div class="highlight"><pre><span class="c">(*</span>
+<span class="c">I tried defining area like this, but it didn&#39;t work. Not too sure why yet, but we&#39;ll get back to it at some point.</span>
+<span class="c">let area r : float -&gt; float = (4.0 *. atan 1.0) *. (r *. r);;</span>
+<span class="c">Error: This expression has type float but an expression was expected of type</span>
+<span class="c">         float -&gt; float</span>
+<span class="c">*)</span>
+ 
+<span class="k">let</span> <span class="n">pi</span> <span class="o">=</span> <span class="mi">4</span><span class="o">.</span><span class="mi">0</span> <span class="o">*.</span> <span class="n">atan</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">;;</span> <span class="c">(* extracted pi out, this is as close as you can get apparently to pi with OCaml&#39;s float *)</span>
+<span class="k">let</span> <span class="n">area</span> <span class="n">r</span> <span class="o">=</span>
+  <span class="n">pi</span> <span class="o">*.</span> <span class="o">(</span><span class="n">r</span> <span class="o">*.</span> <span class="n">r</span><span class="o">);;</span>
+
+<span class="n">area</span> <span class="mi">5</span><span class="o">;;</span>  <span class="c">(* - : float = 78.5398163397448315 *)</span>
+</pre></div>

@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Revisiting Scala - Nick Keers</title>
+  <meta name="author" content="Nick Keers">
+
+  
+  <meta name="description" content="Revisiting Scala written in scala,programming,javafx I&rsquo;ve been feeling ill the last couple of days and haven&rsquo;t been able to face writing &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://nickkeers.github.io/blog/2015/06/25/revisiting-scala">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Nick Keers" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-64480409-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Revisiting Scala</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-06-25T14:25:39+01:00" pubdate data-updated="true"></time>
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/scala-programming-javafx/'>scala,programming,javafx</a>
+  
+</span>
+
+
+        </div>
+        <p>I&rsquo;ve been feeling ill the last couple of days and haven&rsquo;t been able to face writing, but today I&rsquo;m a lot better, so that means it&rsquo;s time to write! I&rsquo;m going to take a break from OCaml for a little bit - to tell the truth I was mostly interested in using F# and OCaml was more something to help with learning as F# and OCaml are very similar. Today I&rsquo;m going to look at Scala again which should be more fun as I&rsquo;m a Java programmer!</p>
+
+<!--more-->
+
+
+<h2>The state of Scala</h2>
+
+<p>As of the time of writing (25/06/2015) Scala is currently on version 2.11.7 and has come a long way since I last had a look at it. I&rsquo;m mostly interested in using Scala to create GUI applications and so that&rsquo;s what this post will focus on.</p>
+
+<p>In Java 8 JavaFX was introduced as a replacement for the aging Swing framework. If you&rsquo;ve worked with Swing before I&rsquo;m sure you can see why a replacement is long overdue. Since I&rsquo;m interested in both functional programming and GUI programming this is a perfect opportunity to try out both Scala and JavaFX (via <a href="http://www.scalafx.org/">ScalaFX</a>) at the same time and learn a little about both.</p>
+
+<h2>Installation</h2>
+
+<p>I&rsquo;m not going to cover this in much depth as there are plenty of resources on the internet. I installed the latest version of Scala (2.11.7) as mentioned above, and then installed SBT. To write Scala code I&rsquo;m using IntelliJ with the excellent Scala plugin.</p>
+
+<p>Part of the reason for moving away from OCaml (for now anyway) was the lack of tooling - or at least tooling which would be responsive enough  (I&rsquo;m looking at you eclipse) on the laptop I am currently using.</p>
+
+<p>The hello world code from the ScalaFX code was useful and shows how GUI&rsquo;s are constructed. The code looks like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">package</span> <span class="nn">hello</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.application.JFXApp</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.application.JFXApp.PrimaryStage</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.geometry.Insets</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.Scene</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.effect.DropShadow</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.layout.HBox</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.paint.Color._</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.paint.</span><span class="o">{</span><span class="nc">LinearGradient</span><span class="o">,</span> <span class="nc">Stops</span><span class="o">}</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.text.Text</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">object</span> <span class="nc">ScalaFXHelloWorld</span> <span class="k">extends</span> <span class="nc">JFXApp</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">stage</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PrimaryStage</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">title</span> <span class="k">=</span> <span class="s">&quot;ScalaFX Hello World&quot;</span>
+</span><span class='line'>    <span class="n">scene</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Scene</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">fill</span> <span class="k">=</span> <span class="nc">BLACK</span>
+</span><span class='line'>      <span class="n">content</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">HBox</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">padding</span> <span class="k">=</span> <span class="nc">Insets</span><span class="o">(</span><span class="mi">20</span><span class="o">)</span>
+</span><span class='line'>        <span class="n">content</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
+</span><span class='line'>          <span class="k">new</span> <span class="nc">Text</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">text</span> <span class="k">=</span> <span class="s">&quot;Hello &quot;</span>
+</span><span class='line'>            <span class="n">style</span> <span class="k">=</span> <span class="s">&quot;-fx-font-size: 48pt&quot;</span>
+</span><span class='line'>            <span class="n">fill</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LinearGradient</span><span class="o">(</span>
+</span><span class='line'>              <span class="n">endX</span> <span class="k">=</span> <span class="mi">0</span><span class="o">,</span>
+</span><span class='line'>              <span class="n">stops</span> <span class="k">=</span> <span class="nc">Stops</span><span class="o">(</span><span class="nc">PALEGREEN</span><span class="o">,</span> <span class="nc">SEAGREEN</span><span class="o">))</span>
+</span><span class='line'>          <span class="o">},</span>
+</span><span class='line'>          <span class="k">new</span> <span class="nc">Text</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">text</span> <span class="k">=</span> <span class="s">&quot;World!!!&quot;</span>
+</span><span class='line'>            <span class="n">style</span> <span class="k">=</span> <span class="s">&quot;-fx-font-size: 48pt&quot;</span>
+</span><span class='line'>            <span class="n">fill</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LinearGradient</span><span class="o">(</span>
+</span><span class='line'>              <span class="n">endX</span> <span class="k">=</span> <span class="mi">0</span><span class="o">,</span>
+</span><span class='line'>              <span class="n">stops</span> <span class="k">=</span> <span class="nc">Stops</span><span class="o">(</span><span class="nc">CYAN</span><span class="o">,</span> <span class="nc">DODGERBLUE</span><span class="o">)</span>
+</span><span class='line'>            <span class="o">)</span>
+</span><span class='line'>            <span class="n">effect</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">DropShadow</span> <span class="o">{</span>
+</span><span class='line'>              <span class="n">color</span> <span class="k">=</span> <span class="nc">DODGERBLUE</span>
+</span><span class='line'>              <span class="n">radius</span> <span class="k">=</span> <span class="mi">25</span>
+</span><span class='line'>              <span class="n">spread</span> <span class="k">=</span> <span class="mf">0.25</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>        <span class="o">)</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The result looks like this: <img class="center" src="/images/scalafx_hello.png"></p>
+
+<p>Simple enough, right? Looks like components are even styled using CSS-like properties which is handy.</p>
+
+<h2>Something more complex</h2>
+
+<p>Of course, it wouldn&rsquo;t do to learn about a GUI framework and not create a temperature converter. So let&rsquo;s do so!</p>
+
+<p>We&rsquo;ll make a temperature converter which converts between degrees celcius and farenheight.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">package</span> <span class="nn">hello</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.application.JFXApp</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.application.JFXApp.PrimaryStage</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.collections.ObservableBuffer</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.Scene</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.control.</span><span class="o">{</span><span class="nc">ComboBox</span><span class="o">,</span> <span class="nc">Label</span><span class="o">,</span> <span class="nc">TextField</span><span class="o">}</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">javafx.util.StringConverter</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm"> * Created by nick on 26/06/15.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">TempConvert</span> <span class="k">extends</span> <span class="nc">JFXApp</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">cToF</span><span class="o">(</span><span class="n">c</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">(</span><span class="mi">9</span><span class="o">/</span><span class="mi">5</span><span class="n">d</span> <span class="o">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">+</span> <span class="mi">32</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">fToC</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span><span class="n">d</span> <span class="o">*</span> <span class="o">(</span><span class="n">f</span> <span class="o">-</span> <span class="mi">32</span><span class="o">)</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">cToF</span><span class="o">(</span><span class="n">c</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">cToF</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="n">toDouble</span><span class="o">).</span><span class="n">round</span><span class="o">.</span><span class="n">toString</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">fToC</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">fToC</span><span class="o">(</span><span class="n">f</span><span class="o">.</span><span class="n">toDouble</span><span class="o">).</span><span class="n">round</span><span class="o">.</span><span class="n">toString</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">val</span> <span class="n">contents</span> <span class="k">=</span> <span class="nc">ObservableBuffer</span><span class="o">(</span><span class="s">&quot;C&quot;</span><span class="o">,</span> <span class="s">&quot;F&quot;</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">val</span> <span class="n">myCombo</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ComboBox</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">items</span> <span class="k">=</span> <span class="n">contents</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">val</span> <span class="n">celsius</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">TextField</span>
+</span><span class='line'>  <span class="k">val</span> <span class="n">fahrenheit</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">TextField</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="n">isNumeric</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">try</span> <span class="o">{</span> <span class="n">s</span><span class="o">.</span><span class="n">toDouble</span> <span class="o">}</span>
+</span><span class='line'>    <span class="k">catch</span> <span class="o">{</span> <span class="k">case</span> <span class="k">_:</span> <span class="kt">Throwable</span> <span class="o">=&gt;</span> <span class="k">return</span> <span class="kc">false</span> <span class="o">}</span>
+</span><span class='line'>    <span class="kc">true</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">celsius</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">bindBidirectional</span><span class="o">[</span><span class="kt">String</span><span class="o">](</span><span class="n">fahrenheit</span><span class="o">.</span><span class="n">text</span><span class="o">,</span> <span class="k">new</span> <span class="nc">StringConverter</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">override</span> <span class="k">def</span> <span class="n">fromString</span><span class="o">(</span><span class="n">c</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">isNumeric</span><span class="o">(</span><span class="n">c</span><span class="o">))</span> <span class="n">cToF</span><span class="o">(</span><span class="n">c</span><span class="o">)</span> <span class="k">else</span> <span class="n">fahrenheit</span><span class="o">.</span><span class="n">text</span><span class="o">()</span>
+</span><span class='line'>    <span class="k">override</span> <span class="k">def</span> <span class="n">toString</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">isNumeric</span><span class="o">(</span><span class="n">f</span><span class="o">))</span> <span class="n">fToC</span><span class="o">(</span><span class="n">f</span><span class="o">)</span> <span class="k">else</span> <span class="n">celsius</span><span class="o">.</span><span class="n">text</span><span class="o">()</span>
+</span><span class='line'>  <span class="o">})</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">stage</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PrimaryStage</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">title</span> <span class="k">=</span> <span class="s">&quot;Temperature Convert&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">scene</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Scene</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">content</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="n">celsius</span><span class="o">,</span> <span class="nc">Label</span><span class="o">(</span><span class="s">&quot;Celsius =&quot;</span><span class="o">),</span> <span class="n">fahrenheit</span><span class="o">,</span> <span class="nc">Label</span><span class="o">(</span><span class="s">&quot;Fahrenheit&quot;</span><span class="o">))</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is mostly copy and pasted code from <a href="https://github.com/eugenkiss/7guis/blob/master/Scala-ScalaFX/src/main/scala/sevenguis/temperature/Temperature.scala">7 GUI&rsquo;s</a>, but wow, there&rsquo;s actually a lot going on in these 50 or so lines. The main thing to note here is the bidirectional binding between the class variables celsius and fahrenheit, when you update one textbox, the other updates too - this is going to be extremely useful!</p>
+
+<h2>So, where do we go from here?</h2>
+
+<p>There are a couple of applications I&rsquo;d like to make to learn a bit more about Scala. I&rsquo;d like to make an application like <a href="http://pad.haroopress.com/">HarooPad</a> which i&rsquo;m using to crate new posts for this blog which is running Octopress; however I&rsquo;d like the ability to parse the YAML in the header and for the GUI to be more minimal - all I want is a pane on the left for markdown and a live preview on the right.</p>
+
+<p>I also play a fair amount of League of Legends, Riot Games has an official API to interact with game data and so I&rsquo;d like to have a play around with this in Scala to make an application to see opponents stats or to analyse my performance in games.</p>
+
+<p>I&rsquo;m not sure which one would be easier to make first, or if I&rsquo;d maybe have to do something smaller first. However, I feel I learn faster by having a project to complete and learning as I go - so many decisions&hellip;</p>
+
+<p>That&rsquo;s all for now!</p>
+
+
+        <hr class="divider-short"/>
+
+        
+        <section>
+          <h1>Comments</h1>
+          <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        </section>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2015/06/24/learning-ocaml-part-2/" title="Previous Post: Learning OCaml - Part 2">&laquo; Previous: Learning OCaml - Part 2</a>
+        
+
+        
+          <a class="pull-right" href="/blog/2015/07/03/erlang-and-elixir/" title="Next Post: Erlang and Elixir">Next: Erlang and Elixir &raquo;</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/nickkeers"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+
+    
+    <a href="https://github.com/nickkeers"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+    
+      
+
+<script type="text/javascript">
+      var disqus_shortname = 'nickkeers';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://nickkeers.github.io/blog/2015/06/25/revisiting-scala/';
+        var disqus_url = 'http://nickkeers.github.io/blog/2015/06/25/revisiting-scala/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+    
+  </body>
+</html>

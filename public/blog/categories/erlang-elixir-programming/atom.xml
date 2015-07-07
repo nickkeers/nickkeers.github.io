@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Erlang,elixir,programming | Nick Keers]]></title>
+  <link href="http://nickkeers.github.io/blog/categories/erlang-elixir-programming/atom.xml" rel="self"/>
+  <link href="http://nickkeers.github.io/"/>
+  <updated>2015-07-07T17:28:18+01:00</updated>
+  <id>http://nickkeers.github.io/</id>
+  <author>
+    <name><![CDATA[Nick Keers]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Erlang and Elixir]]></title>
+    <link href="http://nickkeers.github.io/blog/2015/07/03/erlang-and-elixir/"/>
+    <updated>2015-07-03T16:08:22+01:00</updated>
+    <id>http://nickkeers.github.io/blog/2015/07/03/erlang-and-elixir</id>
+    <content type="html"><![CDATA[<p>As shown by my previous posts I&rsquo;ve been getting back into the world of functional programming after finishing my degree in Computer Science where I worked mostly in Java (plus a bit of C++ and PHP).</p>
+
+<p>I still intend to keep learning Scala, however I&rsquo;m currently reading through basic tutorials and a book and I don&rsquo;t think I&rsquo;m at the point where what I write about Scala would be interesting - at least, not yet. So, let&rsquo;s look at something I&rsquo;m more comfortable with.</p>
+
+<!--more-->
+
+
+<p>In my final year dissertation I used Erlang to create a set of example sorting programs which used distributed processing on a small scale. I used four computers to implement the merge sort and bitonic sorting algorithms.</p>
+
+<p>I learnt some Erlang in the process, but it was mostly the basics; I feel as if I barely scratched the surface - however, I could tell that there was a lot that I liked about the language. Pattern matching for example is very powerful, and it makes functions that you have written extremely clear.</p>
+
+<p>For example, if you wanted to write some Erlang code which computes the sum of a list we can write this:</p>
+
+<p><figure class='code'><figcaption><span>sum.erl </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='erlang'><span class='line'><span class="p">-</span><span class="ni">module</span><span class="p">(</span><span class="n">sum</span><span class="p">).</span>
+</span><span class='line'><span class="p">-</span><span class="ni">export</span><span class="p">([</span><span class="n">sum</span><span class="o">/</span><span class="mi">1</span><span class="p">]).</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">sum</span><span class="p">(</span><span class="nv">L</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="n">sum</span><span class="p">(</span><span class="nv">L</span><span class="p">,</span> <span class="mi">0</span><span class="p">).</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">sum</span><span class="p">([</span><span class="nv">H</span><span class="p">|</span><span class="nv">T</span><span class="p">],</span> <span class="nv">N</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="n">sum</span><span class="p">(</span><span class="nv">T</span><span class="p">,</span> <span class="nv">N</span> <span class="o">+</span> <span class="nv">H</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">sum</span><span class="p">([],</span><span class="nv">N</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="nv">N</span><span class="p">.</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>We can then call run in the shell <code>erl</code> followed by <code>c(sum).</code> in the Erlang shell to compile the file (assuming you&rsquo;re in the same directory). From the shell you can run <code>sum:sum(lists:seq(1,100)).</code> which should return <code>5050</code>. In a more traditional language such as Java you&rsquo;d have to write:</p>
+
+<p><figure class='code'><figcaption><span>Sum.java </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">class</span> <span class="nc">Sum</span> <span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">numbers</span><span class="o">)</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span> <span class="o">:</span> <span class="n">numbers</span><span class="o">)</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="n">total</span> <span class="o">+=</span> <span class="n">n</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Total: &quot;</span> <span class="o">+</span> <span class="n">total</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="kt">int</span><span class="o">[]</span> <span class="n">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">100</span><span class="o">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="o">;=</span> <span class="mi">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="n">numbers</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">sum</span><span class="o">(</span><span class="n">numbers</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Then you could compile with <code>javac Sum.java</code> and run with <code>java Sum</code> (or you could use your preferred IDE, whichever works). That&rsquo;s a lot of code compared to the Erlang version, however I am aware that not everyone is a fan of functional programming.</p>
+
+<h2>Onto Elixir</h2>
+
+<p>I decided then to look at Elixir as I feel that Erlang at times can be quite verbose. Code like in the example below is not uncommon when using Erlang:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='erlang'><span class='line'><span class="nf">myfunction</span><span class="p">(</span><span class="nv">X</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="n">funcOne</span><span class="p">(</span><span class="n">funcTwo</span><span class="p">(</span><span class="n">funcThree</span><span class="p">(</span><span class="nv">X</span><span class="p">))).</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>However, in Elixir we can write this as:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kd">def</span> <span class="n">myfunction</span><span class="p">(</span><span class="nc">X</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nc">X</span>
+</span><span class='line'>  <span class="o">|&gt;</span> <span class="n">funcThree</span>
+</span><span class='line'>  <span class="o">|&gt;</span> <span class="n">funcTwo</span>
+</span><span class='line'>  <span class="o">|&gt;</span> <span class="n">funcOne</span>
+</span><span class='line'><span class="k">end</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>The pipeline operator <code>|&gt;</code> is extremely useful and helps to simplify code further, it works by feeding X into funcThree, and then the result of that into funcTwo and so on.</p>
+
+<p>I then thought I&rsquo;d try and write a small script that does something (vaguely) useful. I decided to write a script to list all of the files in a directory along with their file size. Here&rsquo;s the code:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="kd">defmodule</span> <span class="nc">FileScan</span> <span class="k">do</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="kd">def</span> <span class="n">process</span><span class="p">(</span><span class="n">what</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>    <span class="nc">IO</span><span class="p">.</span><span class="n">puts</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="nc">File</span> <span class="n">sizes</span> <span class="ow">in</span> <span class="n">current</span> <span class="n">directory</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">file</span> <span class="p">&lt;-</span> <span class="n">what</span> <span class="k">do</span>
+</span><span class='line'>      <span class="nc">IO</span><span class="p">.</span><span class="n">puts</span> <span class="s2">&quot;-------------------&quot;</span>
+</span><span class='line'>      <span class="nc">IO</span><span class="p">.</span><span class="n">puts</span> <span class="s2">&quot;File: &quot;</span> <span class="o">&lt;&gt;</span> <span class="n">file</span>
+</span><span class='line'>      <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">f</span><span class="p">}</span> <span class="p">=</span> <span class="ss">:file</span><span class="p">.</span><span class="n">read_file_info</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">details</span> <span class="p">=</span> <span class="nc">File.Stat</span><span class="p">.</span><span class="n">from_record</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span class='line'>      <span class="nc">IO</span><span class="p">.</span><span class="n">puts</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="nc">File</span> <span class="ss">size</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">to_string</span> <span class="n">details</span><span class="p">.</span><span class="n">size</span> <span class="p">)</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span> <span class="n">bytes</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="nc">IO</span><span class="p">.</span><span class="n">puts</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">-&amp;</span><span class="n">rdquo</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">end</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">end</span>
+</span><span class='line'><span class="k">try</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nc">File</span><span class="p">.</span><span class="n">ls!</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;.</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;)</span> <span class="o">|&gt;</span> <span class="nc">Enum</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="k">fn</span> <span class="n">f</span> <span class="p">-&gt;</span> <span class="ow">not</span> <span class="nc">File</span><span class="p">.</span><span class="n">dir?</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">end</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">|&gt;</span> <span class="nc">FileScan</span><span class="p">.</span><span class="n">process</span><span class="p">()</span>
+</span><span class='line'><span class="k">rescue</span>
+</span><span class='line'>  <span class="nc">File.Error</span> <span class="p">-&gt;</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="nc">Rescued</span> <span class="n">file</span> <span class="n">error</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">_error</span>     <span class="p">-&gt;</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="nc">Rescued</span> <span class="n">unknown</span> <span class="n">error</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2>Wrapping up</h2>
+
+<p>What I really liked about this bit of code was the simplicity. When I&rsquo;m writing Erlang I feel as if I have to think about every line of code I&rsquo;m writing, but with Elixir I don&rsquo;t get that feeling. It took me a little while to understand how the File.Stat module worked, but once I understood that it was easy.</p>
+
+<p>Soon I&rsquo;ll port this code over to Erlang for a comparison, most likely by editing this post so I&rsquo;ll post on Twitter when that&rsquo;s done.</p>
+
+<p>That&rsquo;s all for now. Anyone had a similar experience? Or maybe even used Elixir? If so what do you like about it - and have you got any example code you&rsquo;d like to show that&rsquo;s relatively short?</p>
+]]></content>
+  </entry>
+  
+</feed>

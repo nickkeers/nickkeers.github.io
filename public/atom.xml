@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Nick Keers]]></title>
+  <link href="http://nickkeers.github.io/atom.xml" rel="self"/>
+  <link href="http://nickkeers.github.io/"/>
+  <updated>2015-07-07T17:28:18+01:00</updated>
+  <id>http://nickkeers.github.io/</id>
+  <author>
+    <name><![CDATA[Nick Keers]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Erlang and Elixir]]></title>
+    <link href="http://nickkeers.github.io/blog/2015/07/03/erlang-and-elixir/"/>
+    <updated>2015-07-03T16:08:22+01:00</updated>
+    <id>http://nickkeers.github.io/blog/2015/07/03/erlang-and-elixir</id>
+    <content type="html"><![CDATA[<p>As shown by my previous posts I&rsquo;ve been getting back into the world of functional programming after finishing my degree in Computer Science where I worked mostly in Java (plus a bit of C++ and PHP).</p>
+
+<p>I still intend to keep learning Scala, however I&rsquo;m currently reading through basic tutorials and a book and I don&rsquo;t think I&rsquo;m at the point where what I write about Scala would be interesting - at least, not yet. So, let&rsquo;s look at something I&rsquo;m more comfortable with.</p>
+
+<!--more-->
+
+
+<p>In my final year dissertation I used Erlang to create a set of example sorting programs which used distributed processing on a small scale. I used four computers to implement the merge sort and bitonic sorting algorithms.</p>
+
+<p>I learnt some Erlang in the process, but it was mostly the basics; I feel as if I barely scratched the surface - however, I could tell that there was a lot that I liked about the language. Pattern matching for example is very powerful, and it makes functions that you have written extremely clear.</p>
+
+<p>For example, if you wanted to write some Erlang code which computes the sum of a list we can write this:</p>
+
+<figure class='code'><figcaption><span>sum.erl </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='erlang'><span class='line'><span class="p">-</span><span class="ni">module</span><span class="p">(</span><span class="n">sum</span><span class="p">).</span>
+</span><span class='line'><span class="p">-</span><span class="ni">export</span><span class="p">([</span><span class="n">sum</span><span class="o">/</span><span class="mi">1</span><span class="p">]).</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">sum</span><span class="p">(</span><span class="nv">L</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="n">sum</span><span class="p">(</span><span class="nv">L</span><span class="p">,</span> <span class="mi">0</span><span class="p">).</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">sum</span><span class="p">([</span><span class="nv">H</span><span class="p">|</span><span class="nv">T</span><span class="p">],</span> <span class="nv">N</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="n">sum</span><span class="p">(</span><span class="nv">T</span><span class="p">,</span> <span class="nv">N</span> <span class="o">+</span> <span class="nv">H</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">sum</span><span class="p">([],</span><span class="nv">N</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="nv">N</span><span class="p">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can then call run in the shell <code>erl</code> followed by <code>c(sum).</code> in the Erlang shell to compile the file (assuming you&rsquo;re in the same directory). From the shell you can run <code>sum:sum(lists:seq(1,100)).</code> which should return <code>5050</code>. In a more traditional language such as Java you&rsquo;d have to write:</p>
+
+<figure class='code'><figcaption><span>Sum.java </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">class</span> <span class="nc">Sum</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">numbers</span><span class="o">)</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span> <span class="o">:</span> <span class="n">numbers</span><span class="o">)</span>
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>            <span class="n">total</span> <span class="o">+=</span> <span class="n">n</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Total: &quot;</span> <span class="o">+</span> <span class="n">total</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="kt">int</span><span class="o">[]</span> <span class="n">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">100</span><span class="o">];</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>            <span class="n">numbers</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">sum</span><span class="o">(</span><span class="n">numbers</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then you could compile with <code>javac Sum.java</code> and run with <code>java Sum</code> (or you could use your preferred IDE, whichever works). That&rsquo;s a lot of code compared to the Erlang version, however I am aware that not everyone is a fan of functional programming.</p>
+
+<h2>Onto Elixir</h2>
+
+<p>I decided then to look at Elixir as I feel that Erlang at times can be quite verbose. Code like in the example below is not uncommon when using Erlang:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='erlang'><span class='line'><span class="nf">myfunction</span><span class="p">(</span><span class="nv">X</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="n">funcOne</span><span class="p">(</span><span class="n">funcTwo</span><span class="p">(</span><span class="n">funcThree</span><span class="p">(</span><span class="nv">X</span><span class="p">))).</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>However, in Elixir we can write this as:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="kd">def</span> <span class="n">myfunction</span><span class="p">(</span><span class="nc">X</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nc">X</span>
+</span><span class='line'>  <span class="o">|&gt;</span> <span class="n">funcThree</span>
+</span><span class='line'>  <span class="o">|&gt;</span> <span class="n">funcTwo</span>
+</span><span class='line'>  <span class="o">|&gt;</span> <span class="n">funcOne</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The pipeline operator <code>|&gt;</code> is extremely useful and helps to simplify code further, it works by feeding X into funcThree, and then the result of that into funcTwo and so on.</p>
+
+<p>I then thought I&rsquo;d try and write a small script that does something (vaguely) useful. I decided to write a script to list all of the files in a directory along with their file size. Here&rsquo;s the code:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="kd">defmodule</span> <span class="nc">FileScan</span> <span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">def</span> <span class="n">process</span><span class="p">(</span><span class="n">what</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>    <span class="nc">IO</span><span class="p">.</span><span class="n">puts</span> <span class="s2">&quot;File sizes in current directory&quot;</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">file</span> <span class="p">&lt;-</span> <span class="n">what</span> <span class="k">do</span>
+</span><span class='line'>      <span class="nc">IO</span><span class="p">.</span><span class="n">puts</span> <span class="s2">&quot;-------------------&quot;</span>
+</span><span class='line'>      <span class="nc">IO</span><span class="p">.</span><span class="n">puts</span> <span class="s2">&quot;File: &quot;</span> <span class="o">&lt;&gt;</span> <span class="n">file</span>
+</span><span class='line'>      <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">f</span><span class="p">}</span> <span class="p">=</span> <span class="ss">:file</span><span class="p">.</span><span class="n">read_file_info</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">details</span> <span class="p">=</span> <span class="nc">File.Stat</span><span class="p">.</span><span class="n">from_record</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span class='line'>      <span class="nc">IO</span><span class="p">.</span><span class="n">puts</span> <span class="s2">&quot;File size: &quot;</span> <span class="o">&lt;&gt;</span> <span class="p">(</span><span class="n">to_string</span> <span class="n">details</span><span class="p">.</span><span class="n">size</span> <span class="p">)</span> <span class="o">&lt;&gt;</span> <span class="s2">&quot; bytes&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="nc">IO</span><span class="p">.</span><span class="n">puts</span> <span class="s2">&quot;-------------------&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="k">try</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nc">File</span><span class="p">.</span><span class="n">ls!</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="nc">Enum</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="k">fn</span> <span class="n">f</span> <span class="p">-&gt;</span> <span class="ow">not</span> <span class="nc">File</span><span class="p">.</span><span class="n">dir?</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">end</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">|&gt;</span> <span class="nc">FileScan</span><span class="p">.</span><span class="n">process</span><span class="p">()</span>
+</span><span class='line'><span class="k">rescue</span>
+</span><span class='line'>  <span class="nc">File.Error</span> <span class="p">-&gt;</span> <span class="s2">&quot;Rescued file error&quot;</span>
+</span><span class='line'>  <span class="n">_error</span>     <span class="p">-&gt;</span> <span class="s2">&quot;Rescued unknown error&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Wrapping up</h2>
+
+<p>What I really liked about this bit of code was the simplicity. When I&rsquo;m writing Erlang I feel as if I have to think about every line of code I&rsquo;m writing, but with Elixir I don&rsquo;t get that feeling. It took me a little while to understand how the File.Stat module worked, but once I understood that it was easy.</p>
+
+<p>Soon I&rsquo;ll port this code over to Erlang for a comparison, most likely by editing this post so I&rsquo;ll post on Twitter when that&rsquo;s done.</p>
+
+<p>That&rsquo;s all for now. Anyone had a similar experience? Or maybe even used Elixir? If so what do you like about it - and have you got any example code you&rsquo;d like to show that&rsquo;s relatively short?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Revisiting Scala]]></title>
+    <link href="http://nickkeers.github.io/blog/2015/06/25/revisiting-scala/"/>
+    <updated>2015-06-25T14:25:39+01:00</updated>
+    <id>http://nickkeers.github.io/blog/2015/06/25/revisiting-scala</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been feeling ill the last couple of days and haven&rsquo;t been able to face writing, but today I&rsquo;m a lot better, so that means it&rsquo;s time to write! I&rsquo;m going to take a break from OCaml for a little bit - to tell the truth I was mostly interested in using F# and OCaml was more something to help with learning as F# and OCaml are very similar. Today I&rsquo;m going to look at Scala again which should be more fun as I&rsquo;m a Java programmer!</p>
+
+<!--more-->
+
+
+<h2>The state of Scala</h2>
+
+<p>As of the time of writing (25/06/2015) Scala is currently on version 2.11.7 and has come a long way since I last had a look at it. I&rsquo;m mostly interested in using Scala to create GUI applications and so that&rsquo;s what this post will focus on.</p>
+
+<p>In Java 8 JavaFX was introduced as a replacement for the aging Swing framework. If you&rsquo;ve worked with Swing before I&rsquo;m sure you can see why a replacement is long overdue. Since I&rsquo;m interested in both functional programming and GUI programming this is a perfect opportunity to try out both Scala and JavaFX (via <a href="http://www.scalafx.org/">ScalaFX</a>) at the same time and learn a little about both.</p>
+
+<h2>Installation</h2>
+
+<p>I&rsquo;m not going to cover this in much depth as there are plenty of resources on the internet. I installed the latest version of Scala (2.11.7) as mentioned above, and then installed SBT. To write Scala code I&rsquo;m using IntelliJ with the excellent Scala plugin.</p>
+
+<p>Part of the reason for moving away from OCaml (for now anyway) was the lack of tooling - or at least tooling which would be responsive enough  (I&rsquo;m looking at you eclipse) on the laptop I am currently using.</p>
+
+<p>The hello world code from the ScalaFX code was useful and shows how GUI&rsquo;s are constructed. The code looks like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">package</span> <span class="nn">hello</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.application.JFXApp</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.application.JFXApp.PrimaryStage</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.geometry.Insets</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.Scene</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.effect.DropShadow</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.layout.HBox</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.paint.Color._</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.paint.</span><span class="o">{</span><span class="nc">LinearGradient</span><span class="o">,</span> <span class="nc">Stops</span><span class="o">}</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.text.Text</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">object</span> <span class="nc">ScalaFXHelloWorld</span> <span class="k">extends</span> <span class="nc">JFXApp</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">stage</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PrimaryStage</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">title</span> <span class="k">=</span> <span class="s">&quot;ScalaFX Hello World&quot;</span>
+</span><span class='line'>    <span class="n">scene</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Scene</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">fill</span> <span class="k">=</span> <span class="nc">BLACK</span>
+</span><span class='line'>      <span class="n">content</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">HBox</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">padding</span> <span class="k">=</span> <span class="nc">Insets</span><span class="o">(</span><span class="mi">20</span><span class="o">)</span>
+</span><span class='line'>        <span class="n">content</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
+</span><span class='line'>          <span class="k">new</span> <span class="nc">Text</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">text</span> <span class="k">=</span> <span class="s">&quot;Hello &quot;</span>
+</span><span class='line'>            <span class="n">style</span> <span class="k">=</span> <span class="s">&quot;-fx-font-size: 48pt&quot;</span>
+</span><span class='line'>            <span class="n">fill</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LinearGradient</span><span class="o">(</span>
+</span><span class='line'>              <span class="n">endX</span> <span class="k">=</span> <span class="mi">0</span><span class="o">,</span>
+</span><span class='line'>              <span class="n">stops</span> <span class="k">=</span> <span class="nc">Stops</span><span class="o">(</span><span class="nc">PALEGREEN</span><span class="o">,</span> <span class="nc">SEAGREEN</span><span class="o">))</span>
+</span><span class='line'>          <span class="o">},</span>
+</span><span class='line'>          <span class="k">new</span> <span class="nc">Text</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">text</span> <span class="k">=</span> <span class="s">&quot;World!!!&quot;</span>
+</span><span class='line'>            <span class="n">style</span> <span class="k">=</span> <span class="s">&quot;-fx-font-size: 48pt&quot;</span>
+</span><span class='line'>            <span class="n">fill</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">LinearGradient</span><span class="o">(</span>
+</span><span class='line'>              <span class="n">endX</span> <span class="k">=</span> <span class="mi">0</span><span class="o">,</span>
+</span><span class='line'>              <span class="n">stops</span> <span class="k">=</span> <span class="nc">Stops</span><span class="o">(</span><span class="nc">CYAN</span><span class="o">,</span> <span class="nc">DODGERBLUE</span><span class="o">)</span>
+</span><span class='line'>            <span class="o">)</span>
+</span><span class='line'>            <span class="n">effect</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">DropShadow</span> <span class="o">{</span>
+</span><span class='line'>              <span class="n">color</span> <span class="k">=</span> <span class="nc">DODGERBLUE</span>
+</span><span class='line'>              <span class="n">radius</span> <span class="k">=</span> <span class="mi">25</span>
+</span><span class='line'>              <span class="n">spread</span> <span class="k">=</span> <span class="mf">0.25</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>        <span class="o">)</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The result looks like this: <img class="center" src="http://nickkeers.github.io/images/scalafx_hello.png"></p>
+
+<p>Simple enough, right? Looks like components are even styled using CSS-like properties which is handy.</p>
+
+<h2>Something more complex</h2>
+
+<p>Of course, it wouldn&rsquo;t do to learn about a GUI framework and not create a temperature converter. So let&rsquo;s do so!</p>
+
+<p>We&rsquo;ll make a temperature converter which converts between degrees celcius and farenheight.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">package</span> <span class="nn">hello</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.application.JFXApp</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.application.JFXApp.PrimaryStage</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.collections.ObservableBuffer</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.Scene</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">scalafx.scene.control.</span><span class="o">{</span><span class="nc">ComboBox</span><span class="o">,</span> <span class="nc">Label</span><span class="o">,</span> <span class="nc">TextField</span><span class="o">}</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">javafx.util.StringConverter</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm"> * Created by nick on 26/06/15.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">TempConvert</span> <span class="k">extends</span> <span class="nc">JFXApp</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">cToF</span><span class="o">(</span><span class="n">c</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="o">(</span><span class="mi">9</span><span class="o">/</span><span class="mi">5</span><span class="n">d</span> <span class="o">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">+</span> <span class="mi">32</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">fToC</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span><span class="n">d</span> <span class="o">*</span> <span class="o">(</span><span class="n">f</span> <span class="o">-</span> <span class="mi">32</span><span class="o">)</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">cToF</span><span class="o">(</span><span class="n">c</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">cToF</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="n">toDouble</span><span class="o">).</span><span class="n">round</span><span class="o">.</span><span class="n">toString</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">fToC</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">fToC</span><span class="o">(</span><span class="n">f</span><span class="o">.</span><span class="n">toDouble</span><span class="o">).</span><span class="n">round</span><span class="o">.</span><span class="n">toString</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">val</span> <span class="n">contents</span> <span class="k">=</span> <span class="nc">ObservableBuffer</span><span class="o">(</span><span class="s">&quot;C&quot;</span><span class="o">,</span> <span class="s">&quot;F&quot;</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">val</span> <span class="n">myCombo</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ComboBox</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">items</span> <span class="k">=</span> <span class="n">contents</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">val</span> <span class="n">celsius</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">TextField</span>
+</span><span class='line'>  <span class="k">val</span> <span class="n">fahrenheit</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">TextField</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="n">isNumeric</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">try</span> <span class="o">{</span> <span class="n">s</span><span class="o">.</span><span class="n">toDouble</span> <span class="o">}</span>
+</span><span class='line'>    <span class="k">catch</span> <span class="o">{</span> <span class="k">case</span> <span class="k">_:</span> <span class="kt">Throwable</span> <span class="o">=&gt;</span> <span class="k">return</span> <span class="kc">false</span> <span class="o">}</span>
+</span><span class='line'>    <span class="kc">true</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">celsius</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">bindBidirectional</span><span class="o">[</span><span class="kt">String</span><span class="o">](</span><span class="n">fahrenheit</span><span class="o">.</span><span class="n">text</span><span class="o">,</span> <span class="k">new</span> <span class="nc">StringConverter</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">override</span> <span class="k">def</span> <span class="n">fromString</span><span class="o">(</span><span class="n">c</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">isNumeric</span><span class="o">(</span><span class="n">c</span><span class="o">))</span> <span class="n">cToF</span><span class="o">(</span><span class="n">c</span><span class="o">)</span> <span class="k">else</span> <span class="n">fahrenheit</span><span class="o">.</span><span class="n">text</span><span class="o">()</span>
+</span><span class='line'>    <span class="k">override</span> <span class="k">def</span> <span class="n">toString</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">isNumeric</span><span class="o">(</span><span class="n">f</span><span class="o">))</span> <span class="n">fToC</span><span class="o">(</span><span class="n">f</span><span class="o">)</span> <span class="k">else</span> <span class="n">celsius</span><span class="o">.</span><span class="n">text</span><span class="o">()</span>
+</span><span class='line'>  <span class="o">})</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">stage</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PrimaryStage</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">title</span> <span class="k">=</span> <span class="s">&quot;Temperature Convert&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">scene</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Scene</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">content</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="n">celsius</span><span class="o">,</span> <span class="nc">Label</span><span class="o">(</span><span class="s">&quot;Celsius =&quot;</span><span class="o">),</span> <span class="n">fahrenheit</span><span class="o">,</span> <span class="nc">Label</span><span class="o">(</span><span class="s">&quot;Fahrenheit&quot;</span><span class="o">))</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is mostly copy and pasted code from <a href="https://github.com/eugenkiss/7guis/blob/master/Scala-ScalaFX/src/main/scala/sevenguis/temperature/Temperature.scala">7 GUI&rsquo;s</a>, but wow, there&rsquo;s actually a lot going on in these 50 or so lines. The main thing to note here is the bidirectional binding between the class variables celsius and fahrenheit, when you update one textbox, the other updates too - this is going to be extremely useful!</p>
+
+<h2>So, where do we go from here?</h2>
+
+<p>There are a couple of applications I&rsquo;d like to make to learn a bit more about Scala. I&rsquo;d like to make an application like <a href="http://pad.haroopress.com/">HarooPad</a> which i&rsquo;m using to crate new posts for this blog which is running Octopress; however I&rsquo;d like the ability to parse the YAML in the header and for the GUI to be more minimal - all I want is a pane on the left for markdown and a live preview on the right.</p>
+
+<p>I also play a fair amount of League of Legends, Riot Games has an official API to interact with game data and so I&rsquo;d like to have a play around with this in Scala to make an application to see opponents stats or to analyse my performance in games.</p>
+
+<p>I&rsquo;m not sure which one would be easier to make first, or if I&rsquo;d maybe have to do something smaller first. However, I feel I learn faster by having a project to complete and learning as I go - so many decisions&hellip;</p>
+
+<p>That&rsquo;s all for now!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Learning OCaml - Part 2]]></title>
+    <link href="http://nickkeers.github.io/blog/2015/06/24/learning-ocaml-part-2/"/>
+    <updated>2015-06-24T13:58:01+01:00</updated>
+    <id>http://nickkeers.github.io/blog/2015/06/24/learning-ocaml-part-2</id>
+    <content type="html"><![CDATA[<p>Day 2 of the learning process! Today I’ve changed the way I’m writing, I’m now writing the tutorial as I’m learning, which should make everything easier to understand – the last post was a mix of tenses and wasn’t very clear in my opinion. I’ve also switched to writing the tutorial locally using a WYSIWYG editor called Blue Griffon (<a href="http://bluegriffon.org/">http://bluegriffon.org/</a>), this is still not ideal as the process of adding code tags and hyperlinks etc is slow because of the lack of keyboard shortcuts; but the generated HTML it produces is very tidy.</p>
+
+<!--more-->
+
+
+<h2>Onto the learning!</h2>
+
+<p>So, in part 1 I setup the latest version of OCaml and Opam for managing packages, now we can get to playing with the syntax. OCaml supports a REPL which is always helpful when you’re learning or just wanting to try out something quickly. The REPL can be started with ocaml options objects for interactive mode – I ran ocaml to start.</p>
+
+<p>And so time to play around with some things, I’m going to use the OCaml basics tutorial as a reference.</p>
+
+<p>So, looking through the first lines I can see multi-line comments are in the form:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="c">(*</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">A multiline comment</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">*)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And there are no single line comments, well, guess I can live with that. The basics tutorial then goes into defining functions, but I think that’s going a bit too far forward, instead I’m going to look around for something that describes OCaml types and operators as I know there are different operators depending on the data types used.</p>
+
+<h2>Types</h2>
+
+<p>I searched for “OCaml primitive data types” and found this helpful page: <a href="http://www2.lib.uchicago.edu/keith/ocaml-class/data.html">http://www2.lib.uchicago.edu/keith/ocaml-class/data.html</a> – excellent, it lists all the primitive types. Looks like as far as primitives there are:</p>
+
+<ul>
+<li>Integers</li>
+<li>Floating point</li>
+<li>Characters</li>
+<li>Booleans</li>
+<li>Unit values – for functions that return no value – I’m familiar with
+these through Haskell</li>
+<li>Tuples</li>
+<li>Lists</li>
+<li>Arrays</li>
+<li>Option – optional values, I like how this is included in the standard
+library, very helpful.</li>
+<li>Records</li>
+<li>References</li>
+<li>Variants – user-defined types</li>
+<li>Objects</li>
+<li>Functions</li>
+<li>Exceptions</li>
+<li>Formats (for printf) – how odd.</li>
+</ul>
+
+
+<p>Wow, that’s a lot. Luckily most of these are familiar to me due to previous experience whichis great.
+Operators</p>
+
+<p>I did another search here for “OCaml operators” and found another website: <a href="http://caml.inria.fr/pub/docs/manual-ocaml/expr.html#sec138">http://caml.inria.fr/pub/docs/manual-ocaml/expr.html#sec138</a> Scrolling down reveals a table of operators and their meaning, that’s helpful. And yep, there we go, looks like there are different operators for floating point and integers.</p>
+
+<p>Back to the REPL to try some of them out. Some basic integer expressions, result after the terminating semi-colons:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">;;</span>     <span class="c">(* - : int = 3  *)</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">4</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;;</span>     <span class="c">(* - : int = 2  *)</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">6</span> <span class="o">*</span> <span class="mi">3</span><span class="o">;;</span>     <span class="c">(* - : int = 18 *)</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">~-</span><span class="mi">5</span><span class="o">;;</span>       <span class="c">(* - : int = -5  Representing a negative number *)</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span> <span class="ow">land</span> <span class="mi">0</span><span class="o">;;</span>  <span class="c">(* - : int = 0  Bitwise logical AND *)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ok, well that wasn’t too bad, I like how the Bitwise logical operators are easy to remember: lor, land, lxor, etc. So let’s try some expressions that involve floating point numbers:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="o">+.</span> <span class="mi">1</span><span class="o">.</span><span class="mi">25</span><span class="o">;;</span>   <span class="c">(* - : float = 2.25 *)</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">3</span><span class="o">.</span><span class="mi">141592</span> <span class="o">*.</span> <span class="o">(</span><span class="mi">5</span><span class="o">.</span><span class="mi">0</span> <span class="o">*.</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span><span class="o">);;</span>   <span class="c">(*  - : float = 78.5398 *)</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">9</span><span class="o">.</span><span class="mi">831</span> <span class="o">/.</span> <span class="mi">1</span><span class="o">.</span><span class="mi">3451</span><span class="o">;;</span>  <span class="c">(*  - : float = 7.30875027878968098 *)</span>
+</span><span class='line'><span class="c">(* Wow, a good amount of precision too *)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Functions</h2>
+
+<p>Now we can look at functions! Let’s write a set of functions for computing the area of a circle. The formula for the area of a circle is ${\pi}r^{2}$ , and knowing that we can write a function that takes a radius and returns the area of the circle. Functions in OCaml according to the basics guide are in the form:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="k">let</span> <span class="k">function</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">expr</span><span class="o">;;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So the area function would be:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="c">(*</span>
+</span><span class='line'><span class="c">I tried defining area like this, but it didn&#39;t work. Not too sure why yet, but we&#39;ll get back to it at some point.</span>
+</span><span class='line'><span class="c">let area r : float -&gt; float = (4.0 *. atan 1.0) *. (r *. r);;</span>
+</span><span class='line'><span class="c">Error: This expression has type float but an expression was expected of type</span>
+</span><span class='line'><span class="c">         float -&gt; float</span>
+</span><span class='line'><span class="c">*)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="n">pi</span> <span class="o">=</span> <span class="mi">4</span><span class="o">.</span><span class="mi">0</span> <span class="o">*.</span> <span class="n">atan</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">;;</span> <span class="c">(* extracted pi out, this is as close as you can get apparently to pi with OCaml&#39;s float *)</span>
+</span><span class='line'><span class="k">let</span> <span class="n">area</span> <span class="n">r</span> <span class="o">=</span>
+</span><span class='line'>  <span class="n">pi</span> <span class="o">*.</span> <span class="o">(</span><span class="n">r</span> <span class="o">*.</span> <span class="n">r</span><span class="o">);;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">area</span> <span class="mi">5</span><span class="o">;;</span>  <span class="c">(* - : float = 78.5398163397448315 *)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ok, we’ve covered a lot of ground. That’s the very basics of OCaml, primitive data types and basic functions. Tomorrow I’m going to plan on looking at specifying types in functions and recursion, and perhaps writing a full program that does something useful.</p>
+
+<p>Sidenote: I’ve just copied in the source from the editor, and all the lines were positioned oddly, I had to manually shift lines together as there were odd breaks throughout. Looks like it’s back to the wordpress editor next time, unless anyone has a better idea?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Learning OCaml - Part 1]]></title>
+    <link href="http://nickkeers.github.io/blog/2015/06/24/learning-ocaml-part-1/"/>
+    <updated>2015-06-24T13:57:51+01:00</updated>
+    <id>http://nickkeers.github.io/blog/2015/06/24/learning-ocaml-part-1</id>
+    <content type="html"><![CDATA[<p>I’ve always been interested in learning OCaml, and I’ve been meaning to get into blogging; this means that this series (or walkthrough, as I’m going to walk you through how I’m learning as I learn) is the perfect opportunity! I’m going to attempt to write a blog post a day from now on, no matter how small the post. And so, let’s get started!</p>
+
+<!--more-->
+
+
+<h2>Installing OCaml</h2>
+
+<p>For future reference I’m running Xubuntu 15.04</p>
+
+<p>To get started I opened up the OCaml website (<a href="https://ocaml.org/">https://ocaml.org/</a>) and clicked the “Install OCaml” button. That button lead me to the OCaml docs. The docs told me I need to install a package manager called Opam, and so I opened a terminal and ran:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install opam</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now that Opam is installed I can use Opam to install the latest version of OCaml, and so I tried to run <code>opam switch 4.02.2</code> but was informed I need to first run <code>opam init</code> and so I ran that first and let Opam modify my profile and ocamlinit files.</p>
+
+<p>To install OCaml I can now run <code>opam switch 4.02.2</code> as follows:</p>
+
+<p><img class="center" src="http://nickkeers.github.io/images/term2.png"></p>
+
+<p>Looks like Opam is compiling OCaml from source – naturally this took a while. Opam also said m4 was needed, as many packages rely on it – who am I to argue? – I installed m4 using apt-get.</p>
+
+<p>I’m glancing at the time as I’m writing this, and I’ve just realised it’s 10:46pm. The OCaml docs recommended installing packages called Batteries and Core.</p>
+
+<p>I can’t seem to work out what Batteries is or does, apparently it’s a “community-driven effort to standardize on an consistent, documented, and comprehensive development platform for the OCaml programming language” – ok but that doesn’t tell me how Batteries included helps me, so I’ll skip the installation for now.</p>
+
+<p>Core however seems more interesting. It looks like Core was written by the folks at Jane Street who are the largest industry users of OCaml, that means that it’s tried and tested. Core is apparently an alternative to the OCaml standard library, and I assume you don’t re-implement the standard library unless you know what you’re doing. And so, I installed Core using Opam (<code>opam install core</code>).</p>
+
+<h2>Running our first OCaml program</h2>
+
+<p>Ok, now the fun part, lets write a program! I found it a bit difficult to find documentation on how to print a string, but I’m going to assume that’s because it’s getting late and I’m looking in the wrong places. Long story short, our hello world program is only one line:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ocaml'><span class='line'><span class="n">print_string</span> <span class="s2">&quot;Hello world!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">;;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Well, that wasn’t too bad – thanks Amir Chaudhry! (<a href="http://amirchaudhry.com/ocaml-installation-and-hello-world/">http://amirchaudhry.com/ocaml-installation-and-hello-world/</a>). I compiled the code using his instructions and it ran like a charm:</p>
+
+<p><img class="center" src="http://nickkeers.github.io/images/opam_term.png"></p>
+
+<p>And so that’s it for tonight, tomorrow I’ll start exploring what the language itself can do by writing an example program and by running through a basic tutorial (or two!).</p>
+]]></content>
+  </entry>
+  
+</feed>
